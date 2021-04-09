@@ -1,0 +1,16 @@
+language: java
+
+jdk: openjdk14
+
+after_success :
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email:
+    recipients:
+      kirbel74@gmail.com
+    on_success: never
+    on_failure: always
+
+env:
+  global: CODECOV_TOKEN="3f4225f2-4431-449b-9181-c821c57f630e"
