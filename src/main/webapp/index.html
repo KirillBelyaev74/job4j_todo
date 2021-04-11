@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="addDescriptionAndPerform.js"></script>
+    <script src="showDoneItems.js"></script>
+    <script src="perform.js"></script>
+
+    <title>Список задач</title>
+</head>
+<body>
+<div class="container">
+    <div class="form-group row" style="margin:20px;">
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="description" placeholder="Описание задачи">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2" id="addDescription">Добавить задачу</button>
+    </div>
+</div>
+<div class="container">
+    <div class="form-group row" style="margin:20px;">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="show" id="showAll">
+            <label class="form-check-label">Показать все задачи</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="show" id="showFalse">
+            <label class="form-check-label">Показать не выполненые задачи</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="show" id="showTrue">
+            <label class="form-check-label">Показать выполненые задачи</label>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Описание</th>
+            <th>Дата создания</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody id="table">
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary mb-2" id="perform">Выпонить задачу</button>
+</div>
+</body>
+</html>
+
+
+

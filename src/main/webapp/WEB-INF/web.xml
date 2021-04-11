@@ -3,5 +3,28 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>ru.job4j.controller.Index</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddDescription</servlet-name>
+    <servlet-class>ru.job4j.controller.AddDescription</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Completed</servlet-name>
+    <servlet-class>ru.job4j.controller.Completed</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddDescription</servlet-name>
+    <url-pattern>/addDescription</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Completed</servlet-name>
+    <url-pattern>/completed</url-pattern>
+  </servlet-mapping>
 </web-app>
