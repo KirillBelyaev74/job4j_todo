@@ -1,11 +1,10 @@
 package ru.job4j.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import ru.job4j.model.Item;
 import ru.job4j.store.SqlItem;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +13,8 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class Index extends HttpServlet {
+
+    private final static Logger LOGGER = Logger.getLogger(Index.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -27,12 +28,17 @@ public class Index extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String done = req.getParameter("done");
-        List<Item> items;
-        if (done.equalsIgnoreCase("all")) {
+        List<Item> items = null;
+        String parameter = req.getParameter("done");
+        if (("all").equalsIgnoreCase(parameter)) {
             items = SqlItem.getInstance().getAllTheItem();
         } else {
-            items = SqlItem.getInstance().getAllTheItemByDone(done);
+            try {
+                boolean done = Boolean.parseBoolean(req.getParameter("done"));
+                items = SqlItem.getInstance().getAllTheItemByDone(done);
+            } catch (Exception e) {
+                LOGGER.error("Incorrectly parameters done " + parameter);
+            }
         }
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("items", items);

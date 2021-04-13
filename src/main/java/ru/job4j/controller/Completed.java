@@ -15,7 +15,7 @@ public class Completed extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String[] itemsId = req.getParameter("itemsId").split(",");
-        Arrays.stream(itemsId).forEach(i -> SqlItem.getInstance().completedItems(i));
+        Arrays.stream(itemsId).forEach(i -> SqlItem.getInstance().completedItems(Integer.parseInt(i)));
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("text", "Задачи Выполнены!");
         try (PrintWriter printWriter = new PrintWriter(resp.getOutputStream())) {
