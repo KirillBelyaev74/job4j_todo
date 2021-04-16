@@ -59,7 +59,7 @@ function parseAnswerToHTML(answer) {
             result += "<tr class=\"active\"><td>";
             input = "<input class=\"form-check-input\" type=\"checkbox\" name=\"item\" value=\"" + item.id + "\"><label class=\"form-check-label\">Выполнить</label>";
         }
-        result += item.description + "</td><td>" + item.created + "</td><td>" + input + "</td></tr>";
+        result += item.description + "</td><td>" + item.created + "</td><td>" + item.customer.login + "</td><td>" + input + "</td></tr>";
     }
     $("#table").html(result);
 }

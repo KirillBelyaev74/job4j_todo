@@ -1,12 +1,14 @@
 package ru.job4j.store;
 
 import org.junit.Test;
+import ru.job4j.model.Customer;
 import ru.job4j.model.Item;
 
 import java.sql.Timestamp;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 
 
@@ -16,9 +18,14 @@ public class SqlItemTest {
 
     @Test
     public void whenGetAllTheItems() {
+        Customer customer = new Customer("Q", "Q");
+        SqlCustomer.getInstance().save(customer);
         Item one = new Item("One", new Timestamp(System.currentTimeMillis()), false);
+        one.setCustomer(customer);
         Item two = new Item("Two", new Timestamp(System.currentTimeMillis()), true);
+        two.setCustomer(customer);
         Item three = new Item("Three", new Timestamp(System.currentTimeMillis()), false);
+        three.setCustomer(customer);
         sqlItem.save(one);
         sqlItem.save(two);
         sqlItem.save(three);

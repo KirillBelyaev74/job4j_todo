@@ -1,6 +1,7 @@
 package ru.job4j.controller;
 
 import org.json.JSONObject;
+import ru.job4j.model.Customer;
 import ru.job4j.model.Item;
 import ru.job4j.store.SqlItem;
 
@@ -17,6 +18,7 @@ public class AddDescription extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String description = req.getParameter("description");
         Item item = new Item(description, new Timestamp(System.currentTimeMillis()), false);
+        item.setCustomer((Customer) req.getSession().getAttribute("customer"));
         item = SqlItem.getInstance().save(item);
         if (item.getId() != 0) {
             JSONObject jsonObject = new JSONObject();

@@ -15,6 +15,10 @@
     <servlet-name>Completed</servlet-name>
     <servlet-class>ru.job4j.controller.Completed</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>ru.job4j.controller.Login</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Index</servlet-name>
     <url-pattern>/index</url-pattern>
@@ -26,5 +30,9 @@
   <servlet-mapping>
     <servlet-name>Completed</servlet-name>
     <url-pattern>/completed</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
 </web-app>

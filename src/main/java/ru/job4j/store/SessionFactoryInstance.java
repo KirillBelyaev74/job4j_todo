@@ -2,7 +2,6 @@ package ru.job4j.store;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import ru.job4j.model.Item;
 
 public class SessionFactoryInstance {
 

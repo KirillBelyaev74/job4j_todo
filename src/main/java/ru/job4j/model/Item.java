@@ -22,6 +22,10 @@ public class Item {
     @Column(name = "done")
     private boolean done;
 
+    @ManyToOne
+    @JoinColumn(name = "id_customer")
+    private Customer customer;
+
     public Item() {
     }
 
@@ -63,6 +67,14 @@ public class Item {
         this.done = done;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -74,12 +86,13 @@ public class Item {
         Item item = (Item) o;
         return id == item.id && done == item.done
                 && Objects.equals(description, item.description)
-                && Objects.equals(created, item.created);
+                && Objects.equals(created, item.created)
+                && Objects.equals(customer, item.customer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, created, done);
+        return Objects.hash(id, description, created, done, customer);
     }
 
     @Override
@@ -89,6 +102,7 @@ public class Item {
                 + ", description = '" + description + '\''
                 + ", created = " + created
                 + ", done = " + done
+                + ", customer = " + customer
                 + '}';
     }
 }
