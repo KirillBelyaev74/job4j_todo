@@ -4,18 +4,18 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import ru.job4j.model.Customer;
 
-public class SqlCustomer extends TransactionSession{
+public class SqlCustomer extends TransactionSession {
 
     private static class InstanceSqlItem {
-        private final static SqlCustomer sqlCustomer = new SqlCustomer();
+        private final static SqlCustomer SQL_CUSTOMER = new SqlCustomer();
     }
 
     public static SqlCustomer getInstance() {
-        return SqlCustomer.InstanceSqlItem.sqlCustomer;
+        return InstanceSqlItem.SQL_CUSTOMER;
     }
 
     public Customer save(Customer customer) {
-        try (Session session = sessionFactory.openSession()) {
+        try (Session session = SESSION_FACTORY.openSession()) {
             session.beginTransaction();
             session.save(customer);
             session.getTransaction().commit();

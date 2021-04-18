@@ -10,10 +10,10 @@ public class SessionFactoryInstance {
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
-                Configuration config = new Configuration();
-                sessionFactory = config.configure().buildSessionFactory();
+                sessionFactory = new Configuration().configure().buildSessionFactory();
             } catch (Exception e) {
                 e.printStackTrace();
+                close();
             }
         }
         return sessionFactory;

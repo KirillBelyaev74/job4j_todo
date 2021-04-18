@@ -6,6 +6,7 @@ create table customer(
     login varchar not null unique,
     password varchar not null);
 drop table customer;
+select * from customer;
 
 create table item(
     id          serial primary key,
@@ -14,3 +15,18 @@ create table item(
     done        boolean   not null,
     id_customer int references customer(id));
 drop table item;
+select * from item;
+delete from item where id_customer IS NULL;
+
+create table category(
+    id serial primary key,
+    name varchar not null);
+drop table category;
+select * from category;
+
+insert into category(name) values ('Работа');
+insert into category(name) values ('Дом');
+insert into category(name) values ('Медицина');
+insert into category(name) values ('Семья');
+insert into category(name) values ('Машина');
+insert into category(name) values ('Мотоцикл');

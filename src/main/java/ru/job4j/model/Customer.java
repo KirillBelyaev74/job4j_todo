@@ -1,6 +1,7 @@
 package ru.job4j.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,10 +21,9 @@ public class Customer {
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
 
-    public Customer(){
-
+    public Customer() {
     }
 
     public Customer(String login, String password) {
@@ -59,8 +59,8 @@ public class Customer {
         return items;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void addItem(Item item) {
+        items.add(item);
     }
 
     @Override
@@ -72,15 +72,13 @@ public class Customer {
             return false;
         }
         Customer customer = (Customer) o;
-        return id == customer.id
-                && Objects.equals(login, customer.login)
-                && Objects.equals(password, customer.password)
-                && Objects.equals(items, customer.items);
+        return id == customer.id && Objects.equals(login, customer.login)
+                && Objects.equals(password, customer.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, items);
+        return Objects.hash(id, login, password);
     }
 
     @Override
@@ -89,7 +87,6 @@ public class Customer {
                 + "id = " + id
                 + ", login = '" + login + '\''
                 + ", password = '" + password + '\''
-                + ", items = " + items
                 + '}';
     }
 }

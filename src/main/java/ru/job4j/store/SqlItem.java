@@ -2,6 +2,7 @@ package ru.job4j.store;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import ru.job4j.model.Category;
 import ru.job4j.model.Item;
 
 import java.util.List;
@@ -9,16 +10,23 @@ import java.util.List;
 public class SqlItem extends TransactionSession {
 
     private static class InstanceSqlItem {
-        private final static SqlItem sqlItem = new SqlItem();
+        private final static SqlItem SQL_ITEM = new SqlItem();
     }
 
     public static SqlItem getInstance() {
-        return InstanceSqlItem.sqlItem;
+        return InstanceSqlItem.SQL_ITEM;
     }
 
-    public Item save(Item item) {
-        try (Session session = sessionFactory.openSession()) {
+    public Item save(Item item, String[] categories) {
+        try (Session session = SESSION_FACTORY.openSession()) {
             session.beginTransaction();
+            if (categories.length != 0) {
+                for (int index = 0; index != categories.length; index++) {
+                    int id = Integer.parseInt(categories[index]);
+                    Category category = session.get(Category.class, id);
+                    item.addCategory(category);
+                }
+            }
             session.save(item);
             session.getTransaction().commit();
         }

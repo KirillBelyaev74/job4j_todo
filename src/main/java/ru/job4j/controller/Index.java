@@ -2,7 +2,9 @@ package ru.job4j.controller;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import ru.job4j.model.Category;
 import ru.job4j.model.Item;
+import ru.job4j.store.SqlCategory;
 import ru.job4j.store.SqlItem;
 
 import javax.servlet.http.HttpServlet;
@@ -19,8 +21,10 @@ public class Index extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Item> items = SqlItem.getInstance().getAllTheItem();
+        List<Category> categories = SqlCategory.getInstance().getAllCategory();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("items", items);
+        jsonObject.put("categories", categories);
         try (PrintWriter printWriter = new PrintWriter(resp.getOutputStream())) {
             printWriter.println(jsonObject.toString());
         }

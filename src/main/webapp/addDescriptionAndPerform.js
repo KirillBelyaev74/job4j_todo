@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $("#addDescription").on("click", function () {
+        let categories = $('#category').val().join(",");
         let description = $("#description").val();
         if (description === "") {
             alert("Опишите задачу которую хотите добавить!")
@@ -8,7 +9,7 @@ $(document).ready(function () {
                 type: "POST",
                 url: "http://localhost:8080/job4j_todo/addDescription",
                 dataType: "json",
-                data: {"description": description}
+                data: {"description": description, "categories": categories}
             }).done(function (data) {
                 let stringJson = JSON.stringify(data);
                 let answer = JSON.parse(stringJson);

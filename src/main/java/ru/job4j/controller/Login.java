@@ -20,6 +20,10 @@ public class Login extends HttpServlet {
         String password = req.getParameter("password");
         if (!login.equals("") && !password.equals("")) {
             Customer customer = sqlCustomer.getCustomerByLoginAndPassword(login, password);
+            if (customer == null) {
+                customer = new Customer(login, password);
+                sqlCustomer.save(customer);
+            }
             req.getSession().setAttribute("customer", customer);
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("text", "Вы успешно авторезовались!");

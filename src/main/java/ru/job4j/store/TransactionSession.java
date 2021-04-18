@@ -11,10 +11,10 @@ public class TransactionSession {
 
     private final static Logger LOGGER = Logger.getLogger(TransactionSession.class);
 
-    protected static final SessionFactory sessionFactory = SessionFactoryInstance.getSessionFactory();
+    protected static final SessionFactory SESSION_FACTORY = SessionFactoryInstance.getSessionFactory();
 
     protected  <T> T transaction(final Function<Session, T> command) {
-        final Session session = sessionFactory.openSession();
+        final Session session = SESSION_FACTORY.openSession();
         Transaction transaction = null;
         T result = null;
         try {

@@ -17,9 +17,10 @@ public class AddDescription extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String description = req.getParameter("description");
+        String[] categories = req.getParameter("categories").split(",");
         Item item = new Item(description, new Timestamp(System.currentTimeMillis()), false);
         item.setCustomer((Customer) req.getSession().getAttribute("customer"));
-        item = SqlItem.getInstance().save(item);
+        item = SqlItem.getInstance().save(item, categories);
         if (item.getId() != 0) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("item", item.getDescription());

@@ -2,6 +2,8 @@ package ru.job4j.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -25,6 +27,9 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "id_customer")
     private Customer customer;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Category> categories = new ArrayList<>();
 
     public Item() {
     }
@@ -75,6 +80,18 @@ public class Item {
         this.customer = customer;
     }
 
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -86,23 +103,23 @@ public class Item {
         Item item = (Item) o;
         return id == item.id && done == item.done
                 && Objects.equals(description, item.description)
-                && Objects.equals(created, item.created)
-                && Objects.equals(customer, item.customer);
+                && Objects.equals(created, item.created);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, created, done, customer);
+        return Objects.hash(id, description, created, done);
     }
 
     @Override
     public String toString() {
-        return "Item { "
-                + "id = " + id
-                + ", description = '" + description + '\''
-                + ", created = " + created
-                + ", done = " + done
-                + ", customer = " + customer
-                + '}';
+        return "Item{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", created=" + created +
+                ", done=" + done +
+                ", customer=" + customer +
+                ", categories=" + categories +
+                '}';
     }
 }

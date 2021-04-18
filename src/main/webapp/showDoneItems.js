@@ -28,6 +28,7 @@ $(document).ready(function () {
         let stringJson = JSON.stringify(data);
         let answer = JSON.parse(stringJson);
         parseAnswerToHTML(answer.items);
+        showCategory(answer.categories);
     }).fail(function (error) {
         alert("Что то пошло не так " + error.val())
     });
@@ -59,7 +60,20 @@ function parseAnswerToHTML(answer) {
             result += "<tr class=\"active\"><td>";
             input = "<input class=\"form-check-input\" type=\"checkbox\" name=\"item\" value=\"" + item.id + "\"><label class=\"form-check-label\">Выполнить</label>";
         }
-        result += item.description + "</td><td>" + item.created + "</td><td>" + item.customer.login + "</td><td>" + input + "</td></tr>";
+        let categories = "";
+        for (let i = 0; i !== item.categories.length; i++) {
+            categories += item.categories[i].name + "<br/>";
+        }
+        result += item.description + "</td><td>" + categories + "</td><td>" + item.created + "</td><td>" + item.customer.login + "</td><td>" + input + "</td></tr>";
     }
     $("#table").html(result);
+}
+
+function showCategory(answer) {
+    let result = "";
+    for (let index = 0; index !== answer.length; index++) {
+        let category = answer[index];
+        result += "<option value=" + category.id + ">" + category.name + "</option>";
+    }
+    $("#category").html(result);
 }
