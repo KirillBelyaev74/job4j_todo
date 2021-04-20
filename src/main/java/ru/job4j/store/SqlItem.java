@@ -33,6 +33,15 @@ public class SqlItem extends TransactionSession {
         return item;
     }
 
+    public Item save(Item item) {
+        try (Session session = SESSION_FACTORY.openSession()) {
+            session.beginTransaction();
+            session.save(item);
+            session.getTransaction().commit();
+        }
+        return item;
+    }
+
     public Item getItemById(int id) {
         return transaction(session -> session.get(Item.class, id));
     }
