@@ -16,7 +16,6 @@ create table item(
     id_customer int references customer(id));
 drop table item;
 select * from item;
-delete from item where id_customer IS NULL;
 
 create table category(
     id serial primary key,

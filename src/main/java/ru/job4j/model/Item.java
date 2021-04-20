@@ -3,6 +3,7 @@ package ru.job4j.model;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,8 +19,9 @@ public class Item {
     @Column(name = "description")
     private String description;
 
+    @Temporal(value = TemporalType.TIMESTAMP)
     @Column(name = "created")
-    private Timestamp created;
+    private Date created;
 
     @Column(name = "done")
     private boolean done;
@@ -34,7 +36,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(String description, Timestamp created, boolean done) {
+    public Item(String description, Date created, boolean done) {
         this.description = description;
         this.created = created;
         this.done = done;
@@ -56,11 +58,11 @@ public class Item {
         this.description = description;
     }
 
-    public Timestamp getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

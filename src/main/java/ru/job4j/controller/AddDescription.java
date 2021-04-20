@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class AddDescription extends HttpServlet {
 
@@ -18,7 +18,7 @@ public class AddDescription extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String description = req.getParameter("description");
         String[] categories = req.getParameter("categories").split(",");
-        Item item = new Item(description, new Timestamp(System.currentTimeMillis()), false);
+        Item item = new Item(description, new Date(), false);
         item.setCustomer((Customer) req.getSession().getAttribute("customer"));
         item = SqlItem.getInstance().save(item, categories);
         if (item.getId() != 0) {
