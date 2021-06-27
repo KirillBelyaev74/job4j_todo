@@ -7,6 +7,7 @@
 
 Технологии:
 - PostgresSQL
+- Servlet
 - Hibernate
 - Apache Tomcat
 - JS / Jquery
@@ -16,15 +17,6 @@
 
 Приложение состоит только из главной страницы
 ![screenshot of sample](screenshots/1.png)
-
-Регистрация/авторизация пользователя
-![screenshot of sample](screenshots/2.png)
-
-Выбор категории и описание задачи
-![screenshot of sample](screenshots/3.png)
-
-Отображение задач
-![screenshot of sample](screenshots/4.png)
 
 Если задача выполнена, необходимо отметить ее
 ![screenshot of sample](screenshots/5.png)
